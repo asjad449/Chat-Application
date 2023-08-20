@@ -1,20 +1,19 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
-import { IoLogoGoogle, IoLogoFacebook } from "react-icons/io";
+import { IoLogoGoogle } from "react-icons/io";
 
 import { auth } from "@/firebase/firebase";
 import { signInWithEmailAndPassword,
      GoogleAuthProvider,
-    signInWithPopup, 
-     FacebookAuthProvider, 
+    signInWithPopup,  
      sendPasswordResetEmail } from "firebase/auth";
 import { useAuth } from "@/context/authContext";
 
 import { useRouter } from "next/router";
 
 const gProvider = new GoogleAuthProvider();
-const fProvider = new FacebookAuthProvider();
+
 
 import ToastMessage from "@/components/ToastMessage";
 import { toast } from 'react-toastify';
@@ -53,14 +52,14 @@ const Login = () => {
          
       }
    };
-   const signInWithFacebook = async () => {
-      try {
-          await signInWithPopup(auth, fProvider);
-      } catch (error) {
-         console.error(error);
+   // const signInWithFacebook = async () => {
+   //    try {
+   //        await signInWithPopup(auth, fProvider);
+   //    } catch (error) {
+   //       console.error(error);
          
-      }
-   };
+   //    }
+   // };
    const resetPassword = async () => {
       try {
            toast.promise(async () => {
@@ -72,6 +71,7 @@ const Login = () => {
            }, {
             autoClose: 5000
            })
+           console.log("Email send to your registered email id.");
       } catch (error) {
          console.error(error);
          
@@ -84,7 +84,7 @@ const Login = () => {
       ) : (
      <div className="h-[100vh] flex justify-center items-center bg-c1">
       <ToastMessage/>
-        <div className="flex items-center flex-col">
+        <div className="flex items-center flex-col w-[600px]">
             <div className="text-center">
                <div className="text-4xl font-bold">
                   Login to Your Account
@@ -93,9 +93,9 @@ const Login = () => {
                   Connect and chat with anyone,anywhere
                </div>
             </div> 
-            <div className="flex items-center gap-2 w-full mt-10 mb-5">
-               <div className="bg-gradient-to-r from-indigo-500 via-purple-500
-               to-pink-500 w-1/2 h-14 rounded-md cursor-pointer p-[1px]"
+            <div className="flex items-center gap-2 ml-14 w-full mt-10 mb-5">
+               <div className="bg-gradient-to-r from-indigo-500 ml-14 via-purple-500
+               to-pink-500 w-2/3 h-14 rounded-md cursor-pointer p-[1px]"
                onClick={signInWithGoogle}>
                   <div className="flex items-center justify-center gap-3
                   text-white font-semibold bg-c1 w-full h-full rounded-md">
@@ -103,15 +103,15 @@ const Login = () => {
                      <span>Login with Google</span>
                   </div>
                </div>
-               <div className="bg-gradient-to-r from-indigo-500 via-purple-500
+               {/*  <div className="bg-gradient-to-r from-indigo-500 via-purple-500
                to-pink-500 w-1/2 h-14 rounded-md cursor-pointer p-[1px]"
                onClick={signInWithFacebook}>
                   <div className="flex items-center justify-center gap-3
                   text-white font-semibold bg-c1 w-full h-full rounded-md">
                      <IoLogoFacebook size={24}/>
                      <span>Login with Facebook</span>
-                  </div>
-               </div>
+                  </div> 
+               </div> */}
             </div> 
 
             <div className="flex items-center gap-1">
